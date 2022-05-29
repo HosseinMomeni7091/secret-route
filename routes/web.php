@@ -13,14 +13,23 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
+Route::get('/home', function () {
     return view('welcome');
+})->name("Main");
+
+// First Solution
+Route::redirect('users/list', '/home', 301);
+
+
+// Second Solution
+Route::get('users/list', function() {
+    return redirect()->route("Main");
 });
 
 Route::get('users/{id}', function($id) {
     return "this page is profile for user $id";
 });
 
-Route::get('users/list', function() {
-    return "this page will show all users, imagine the list";
-});
+
+// Solution 2
+// ->whereNumber("id")
